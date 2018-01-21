@@ -2,7 +2,7 @@ const execa = require('execa')
 
 async function tarList (arch) {
   /**
-   * Run tar list command.
+   * Run tar list.
    */
   try {
     const result = await execa('tar', ['-tf', arch])
@@ -12,18 +12,25 @@ async function tarList (arch) {
   }
 }
 
-async function tarCompress (arch, path) {
+async function tarCompress (arch, path, options = { type: 'gzip', level: 6 }) {
+  /**
+   * Run tar create archive.
+   */
   try {
-    const result = await execa('tar', ['-cvzf', arch, path])
+    const result = await execa.shell(`tar -cvzf ${arch} ${path}`)
     return result
   } catch (err) {
     throw err
   }
 }
 
-async function tarExtract (arch, path = '') {
+async function tarExtract (arch, path = '', options = { overwrite: true }) {
+  /**
+   * Run tar extract.
+   */
+  const over = options.overwrite ? '' : 'k'
   try {
-    const result = await execa('tar', ['-xvzf', arch, path])
+    const result = await execa.shell(`tar -xvf${over} ${arch} ${path}`)
     return result
   } catch (err) {
     throw err
