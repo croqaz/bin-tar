@@ -7,8 +7,8 @@ test('compress and decompress a file', async t => {
   const testArch = 'a.tgz'
 
   const initialText = fs.readFileSync(testFile, 'utf8')
-  await tar.tarCompress(testArch, testFile)
-  await tar.tarExtract(testArch)
+  await tar.compress(testArch, testFile)
+  await tar.extract(testArch)
   const finalText = fs.readFileSync(testFile, 'utf8')
   fs.unlinkSync(testArch) // cleanup
 
@@ -19,8 +19,8 @@ test('compress and list a folder', async t => {
   const testPath = 'fixtures/'
   const testArch = 'fix.tgz'
 
-  await tar.tarCompress(testArch, testPath)
-  const files = await tar.tarList(testArch)
+  await tar.compress(testArch, testPath)
+  const files = await tar.list(testArch)
   fs.unlinkSync(testArch) // cleanup
 
   t.deepEqual(files, [

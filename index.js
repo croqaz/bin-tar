@@ -1,6 +1,6 @@
 const execa = require('execa')
 
-async function tarList (arch) {
+async function list (arch) {
   /**
    * Run tar list.
    */
@@ -12,7 +12,7 @@ async function tarList (arch) {
   }
 }
 
-async function tarCompress (arch, path, options = { type: 'gzip', level: 6 }) {
+async function compress (arch, path, options = { type: 'gzip', level: 6 }) {
   /**
    * Run tar create archive.
    */
@@ -24,7 +24,7 @@ async function tarCompress (arch, path, options = { type: 'gzip', level: 6 }) {
   }
 }
 
-async function tarExtract (arch, path = '', options = { overwrite: true }) {
+async function extract (arch, path = '', options = { overwrite: true }) {
   /**
    * Run tar extract.
    */
@@ -38,7 +38,7 @@ async function tarExtract (arch, path = '', options = { overwrite: true }) {
 }
 
 module.exports = {
-  tarList,
-  tarCompress,
-  tarExtract
+  list,
+  compress,
+  extract
 }
